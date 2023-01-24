@@ -1,0 +1,203 @@
+<template>
+    <main id="main">
+        <app-header :customer="true" />
+        <div class="body">
+            <div class="img img--men"></div>
+            <div class="img img--lady"></div>
+            <div class="img img--clothing"></div>
+            <div class="item-continer">
+                <div class="item">
+                    <div class="category">
+                        <h1>男性</h1>
+                        <div class="actions">
+                            <button class="myshop-btn myshop-btn--secondary" :disabled="busy" @click="handleButtonClick(1, '/items?reset=true', 1)">
+                                注文を作成する
+                                <div v-if="loadingBtn == 1 && busy" class="btn-loading" />
+                            </button>
+                            <button class="myshop-btn myshop-btn--outline" :disabled="busy" @click="handleButtonClick(1, '/products?reset=true', 3)">
+                                洋品購入ボタン
+                                <div v-if="loadingBtn == 3 && busy" class="btn-loading" />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="category">
+                        <h1>女性</h1>
+                        <div class="actions">
+                            <button class="myshop-btn myshop-btn--secondary" :disabled="busy" @click="handleButtonClick(2, '/items?reset=true', 2)">
+                                注文を作成する
+                                <div v-if="loadingBtn == 2 && busy" class="btn-loading" />
+                            </button>
+                            <button class="myshop-btn myshop-btn--outline" :disabled="busy" @click="handleButtonClick(2, '/products?reset=true', 4)">
+                                洋品購入ボタン
+                                <div v-if="loadingBtn == 4 && busy" class="btn-loading" />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="category">
+                        <h1>女性</h1>
+                        <div class="actions">
+                            <button class="myshop-btn myshop-btn--secondary" :disabled="busy" @click="handleButtonClick(2, '/items?reset=true', 2)">
+                                注文を作成する
+                                <div v-if="loadingBtn == 2 && busy" class="btn-loading" />
+                            </button>
+                            <button class="myshop-btn myshop-btn--outline" :disabled="busy" @click="handleButtonClick(2, '/products?reset=true', 4)">
+                                洋品購入ボタン
+                                <div v-if="loadingBtn == 4 && busy" class="btn-loading" />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</template>
+
+<script>
+import { storeToRefs } from 'pinia'
+import { useAppStore } from '@/store'
+import { ref } from '@vue/reactivity'
+
+import AppHeader from '../AppHeader.vue'
+export default {
+    name: 'OrderComponent',
+    components: { AppHeader },
+    setup() {
+        const appStore = useAppStore()
+        const { busy } = storeToRefs(appStore)
+        const { setOrderGender } = appStore
+
+        const loadingBtn = ref(null)
+
+        function handleButtonClick(gender, path, id) {
+            loadingBtn.value = id
+            setOrderGender(gender, path)
+        }
+
+        return {
+            busy,
+            loadingBtn,
+            handleButtonClick
+        }
+    }
+}
+</script>
+
+<style scoped>
+#main {
+    background-color: rgba(37,56,97,1);
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 60px minmax(0, 1fr);
+}
+.body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    gap: 1px;
+}
+.img {
+    display: block;
+    flex: 1;
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;;
+}
+.img--men {
+    background-image: url(https://hanabishi.coremobile.co.jp/html/user_data/assets/img/common/items_mens.png);
+}
+.img--lady {
+    background-image: url(https://hanabishi.coremobile.co.jp/html/user_data/assets/img/common/items_ladies.png);
+}
+.img--clothing {
+    background-image: url(https://hanabishi.coremobile.co.jp/html/user_data/assets/img/common/clothings.png);
+}
+
+.item-continer {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    padding: var(--space-6);
+    transform: translateY(-20px);
+}
+@media (orientation: landscape) {
+    .item-continer {
+        flex-direction: row;
+    }
+}
+.item {
+    width: 100%;
+    padding: var(--space-4);
+    background-color: rgba(37,56,97,.8);
+    backdrop-filter: blur(15px);
+}
+
+.category {
+    padding: var(--space-4);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-auto-columns: auto auto;
+    gap: var(--space-5);
+    width: 100%;
+    border: 1px solid var(--border-color);
+}
+.category h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--c-light);
+    text-align: center;
+    font-family: var(--custom-font);
+}
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    width: 100%;
+    max-width: 300px;
+    justify-self: center;
+}
+
+
+.myshop-btn {
+    position: relative;
+    gap: var(--space-1);
+    --color: #1e1e1e;
+}
+.myshop-btn:disabled {
+    opacity: .7;
+    pointer-events: none;
+}
+.myshop-btn--outline {
+    --color: rgba(255,255,255,.9)
+}
+.myshop-btn--secondary {
+    color: #1e1e1e;
+}
+.myshop-btn .btn-loading {
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--color);
+    border-left-color: transparent;
+    border-radius: 100%;
+    animation: Loading .7s infinite linear;
+}
+@keyframes Loading {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+</style>

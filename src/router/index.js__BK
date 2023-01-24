@@ -1,0 +1,72 @@
+import { createRouter, createWebHistory } from 'vue-router'
+import CustomerView from '../views/CustomerView.vue'
+import CustomerCreateView from '../views/CustomerCreateView.vue'
+import OrderView from '../views/OrderView.vue'
+import ItemsView from '../views/ItemsView.vue'
+import SimulatorView from '../views/SimulatorView.vue'
+import CartView from '../views/CartView.vue'
+import CartItemsView from '../views/CartItemsView.vue'
+import CartSizesView from '../views/CartSizesView.vue'
+
+const routes = [
+  {
+    path: '/',
+    name: 'customer',
+    component: CustomerView,
+  },
+  {
+    path: '/customer/create',
+    name: 'customer-create',
+    component: CustomerCreateView,
+  },
+  {
+    path: '/order',
+    name: 'order',
+    component: OrderView,
+  },
+  {
+    path: '/items',
+    name: 'items',
+    component: ItemsView,
+  },
+  {
+    path: '/simulator',
+    name: 'simulator',
+    component: SimulatorView,
+  },
+  {
+    path: '/cart',
+    name: 'cart',
+    component: CartView,
+    children: [
+      {
+        path: '',
+        name: 'cart-items',
+        component: CartItemsView,
+      },
+      {
+        path: 'sizes',
+        name: 'cart-sizes',
+        component: CartSizesView,
+      },
+    ]
+  },
+]
+
+const router = createRouter({
+  history: createWebHistory('/myshop/'),
+  routes,
+})
+
+// const isCustomer = () => true // Math.random() < 0.5
+
+// router.beforeEach((to) => {
+//   if (
+//     isCustomer()
+//     && to.name !== 'items'
+//   ) {
+//     return { name: 'items' }
+//   }
+// })
+
+export default router

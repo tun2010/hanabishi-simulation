@@ -1,0 +1,97 @@
+{
+    "id": "0001",
+    "customer_id": "",
+    "shop_id": "",
+    "shop_name": "",
+    "staff_id": "",
+    "staff_code": "",
+    "gender": {
+        "id": 1,
+        "name": "Men`s"
+    },
+    "category": {
+        "id": 1,
+        "name": "Suit"
+    },
+    "items": [
+        {
+            "id": 1,
+            "name": "ジャケット"
+        },
+        {
+            "id": 2,
+            "name": "ベスト"
+        },
+        {
+            "id": 3,
+            "name": "パンツ"
+        }
+    ],
+    "fabric": {
+        "id": 2,
+        "name": "Ermenegildo Zegna",
+        "jp_name": "ジョン グリーニシュ",
+        "price": 145200,
+        "descriptions": [
+            "1910年、北イタリア創業で世界最高峰の服地メーカーブランド。",
+            "原毛の買付から素材の開発・紡績などのすべてを自社工場で一貫して行っています。イタリア服地業界のリーダー的存在として知られる巨大テキスタイルメーカーです。"
+        ]
+    },
+    "model": {
+        "id": 1,
+        "name": "A-21"
+    },
+    "silhouette": {
+        "1": {
+            "id": 1,
+            "jp_name": "ブリティッシュ",
+            "name": "British"
+        },
+        "2": {
+            "id": 1,
+            "jp_name": "ブリティッシュ",
+            "name": "British"
+        },
+        "3": {
+            "id": 1,
+            "jp_name": "ブリティッシュ",
+            "name": "British"
+        }
+    },
+    "options": {
+        "1": [
+            {
+                "id": 1,
+                "name": "シルエット",
+                "type": 1,
+                "value": {
+                    "id": 1,
+                    "name": "1B"
+                }
+            }
+        ],
+        "2": [
+            {
+                "id": 1,
+                "name": "シルエット",
+                "type": 1,
+                "value": {
+                    "id": 1,
+                    "name": "1B"
+                }
+            }
+        ],
+        "3": [
+            {
+                "id": 1,
+                "name": "シルエット",
+                "type": 1,
+                "value": {
+                    "id": 1,
+                    "name": "1B"
+                }
+            }
+        ]
+    },
+    "sizes": {}
+}
